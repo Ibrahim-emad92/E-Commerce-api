@@ -1,17 +1,17 @@
-
+const sulgify=require('slugify')
 const CategoryModel=require('../models/categoryModel')
-const getCatogories=(req,res,next)=>{
-    const name=req.body.name;
-    console.log(req.body);
-    const newCategory=new CategoryModel({name:name})
-    newCategory
-    .save()
-    .then((doc)=>{
-        res.json(doc);
-    })
-    .catch((err)=>{
-        res.json(err);
-    })
+exports.getCatogories=(req,res,next)=>{
+    res.send(); 
 }
 
-module.exports={getCatogories}
+exports.createCategory=async(req,res)=>{
+    const name = req.body.name;
+
+    try {
+        const categore=await  CategoryModel.create({name:name,slug:sulgify(name)});
+        res.status(201).json({data:categore});
+    } catch (err) {
+        res.status(400).send(err);
+    }
+   
+}

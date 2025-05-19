@@ -11,11 +11,12 @@ const CreateSchema=new mongoose.Schema({
     slug:{
         type:String,
         lowercase:true
-    }
+    },
+    image:String
 },
     {timestamps:true},
 )
 
-const CreateModel=mongoose.model('Category',CreateSchema)
+let CreateModel=mongoose.model('Category',CreateSchema)
 
-module.exports={CreateModel}
+module.exports=CreateModel;
